@@ -26,7 +26,7 @@ type ProductFiltersProps = {
 };
 
 const selectTriggerClass =
-  'h-auto w-40 shrink-0 items-center gap-2 rounded-lg border border-border bg-background py-2 pr-2 pl-3 shadow-none data-[size=default]:h-auto';
+  'h-auto w-full min-w-0 items-center gap-2 rounded-lg border border-border bg-background py-2 pr-2 pl-3 shadow-none data-[size=default]:h-auto lg:w-36 lg:shrink-0';
 
 function FilterSelectTrigger({ label, children }: { label: string; children: ReactNode }) {
   return (
@@ -47,18 +47,23 @@ export function ProductFilters({ value, onChange }: ProductFiltersProps) {
   };
 
   return (
-    <div className='flex flex-col gap-3 rounded-xl bg-card p-3 ring-1 ring-foreground/10 lg:flex-row lg:items-center'>
-      <div className='relative min-w-0 flex-1'>
+    <div className='flex flex-col gap-3 rounded-xl bg-card p-3 ring-1 ring-foreground/10 lg:flex-row lg:flex-wrap lg:items-center'>
+      {/*
+        basis + wrap: when the main column narrows (e.g. xl right rail ~1280px),
+        search stays on its own row instead of overlapping the selects.
+      */}
+      <div className='relative w-full min-w-0 lg:min-w-[16rem] lg:flex-1 lg:basis-[18rem]'>
         <Search className='pointer-events-none absolute top-1/2 left-2.5 size-4 -translate-y-1/2 text-muted-foreground' />
         <Input
           value={value.search}
           onChange={(e) => update({ search: e.target.value })}
           placeholder='Search products by name, SKU, or barcode...'
-          className='h-12 w-full rounded-lg border border-border bg-background pl-9 shadow-none'
+          className='h-11 w-full min-w-0 rounded-lg border border-border bg-background pr-3 pl-9 text-sm shadow-none sm:h-12 lg:h-12'
+          aria-label='Search products'
         />
       </div>
 
-      <div className='flex flex-wrap items-center gap-2'>
+      <div className='grid w-full min-w-0 grid-cols-2 gap-2 md:grid-cols-4 lg:flex lg:w-auto lg:shrink-0 lg:grow-0 lg:flex-wrap lg:items-center lg:gap-2'>
         <Select
           value={value.category}
           onValueChange={(category) => update({ category: category ?? 'All Categories' })}
@@ -127,7 +132,7 @@ export function ProductFilters({ value, onChange }: ProductFiltersProps) {
           variant='outline'
           size='sm'
           className={cn(
-            'h-12 shrink-0 gap-1.5 rounded-lg border border-border bg-background px-3 shadow-none'
+            'col-span-2 h-11 w-full shrink-0 gap-1.5 rounded-lg border border-border bg-background px-3 shadow-none sm:h-12 md:col-span-4 lg:col-span-1 lg:h-12 lg:w-auto'
           )}
         >
           <ListFilter className='size-4' />
