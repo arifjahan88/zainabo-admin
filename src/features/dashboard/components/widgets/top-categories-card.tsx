@@ -1,10 +1,4 @@
-import {
-  Home,
-  Laptop,
-  Shirt,
-  Sparkles,
-  type LucideIcon,
-} from 'lucide-react';
+import { Home, Laptop, Shirt, Sparkles, type LucideIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 import { Button } from '@/components/ui/button';
@@ -26,47 +20,45 @@ const icons: LucideIcon[] = [Shirt, Laptop, Home, Sparkles, Shirt];
 
 export function TopCategoriesCard() {
   return (
-    <Card className="shadow-none">
-      <CardHeader className="flex flex-row items-center justify-between gap-2 pb-2">
-        <CardTitle className="text-base font-semibold text-foreground">
+    <Card className='shadow-none'>
+      <CardHeader className='flex flex-row items-center justify-between gap-2 pb-2'>
+        <CardTitle className='text-base font-semibold text-foreground'>
           Top Performing Categories
         </CardTitle>
         <Button
-          variant="link"
-          size="sm"
-          className="h-auto px-0 text-primary"
+          variant='link'
+          size='sm'
+          className='h-auto px-0 text-primary'
           nativeButton={false}
           render={<Link to={URLReports()} />}
         >
           View Report
         </Button>
       </CardHeader>
-      <CardContent className="space-y-3.5">
+      <CardContent className='space-y-3.5'>
         {topCategories.map((category, index) => {
           const Icon = icons[index % icons.length];
           const tone = toneStyles[category.tone];
 
           return (
-            <div key={category.id} className="space-y-1.5">
-              <div className="flex items-center gap-2.5">
+            <div key={category.id} className='space-y-1.5'>
+              <div className='flex items-center gap-2.5'>
                 <span
                   className={cn(
                     'flex size-8 shrink-0 items-center justify-center rounded-lg',
                     tone.icon
                   )}
                 >
-                  <Icon className="size-3.5" />
+                  <Icon className='size-3.5' />
                 </span>
-                <div className="min-w-0 flex-1">
-                  <div className="flex items-center justify-between gap-2">
-                    <p className="truncate text-sm font-medium text-foreground">
-                      {category.label}
-                    </p>
-                    <p className="shrink-0 text-sm font-semibold text-foreground">
+                <div className='min-w-0 flex-1'>
+                  <div className='flex items-center justify-between gap-2'>
+                    <p className='truncate text-sm font-medium text-foreground'>{category.label}</p>
+                    <p className='shrink-0 text-sm font-semibold text-foreground'>
                       {category.value}
                     </p>
                   </div>
-                  <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-muted">
+                  <div className='mt-1.5 h-1.5 overflow-hidden rounded-full bg-muted'>
                     <div
                       className={cn('h-full rounded-full', tone.bar)}
                       style={{ width: `${category.progress}%` }}

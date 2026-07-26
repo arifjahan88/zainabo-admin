@@ -45,13 +45,7 @@ export type TopCategory = {
   tone: KpiTone;
 };
 
-export type OrderStatus =
-  | 'new'
-  | 'processing'
-  | 'packed'
-  | 'shipped'
-  | 'delivered'
-  | 'cancelled';
+export type OrderStatus = 'new' | 'processing' | 'packed' | 'shipped' | 'delivered' | 'cancelled';
 
 export type RecentOrder = {
   id: string;

@@ -13,23 +13,13 @@ import { QuickActionsCard } from '@/features/products/components/widgets/quick-a
 import { mockProducts } from '@/features/products/data/mock-products';
 import type { Product } from '@/features/products/types';
 
-function filterProducts(
-  products: Product[],
-  filters: ProductFiltersState
-): Product[] {
+function filterProducts(products: Product[], filters: ProductFiltersState): Product[] {
   return products.filter((product) => {
     const q = filters.search.trim().toLowerCase();
-    if (
-      q &&
-      !product.name.toLowerCase().includes(q) &&
-      !product.sku.toLowerCase().includes(q)
-    ) {
+    if (q && !product.name.toLowerCase().includes(q) && !product.sku.toLowerCase().includes(q)) {
       return false;
     }
-    if (
-      filters.category !== 'All Categories' &&
-      product.category !== filters.category
-    ) {
+    if (filters.category !== 'All Categories' && product.category !== filters.category) {
       return false;
     }
     if (filters.brand !== 'All Brands' && product.brand !== filters.brand) {
@@ -39,10 +29,7 @@ function filterProducts(
       return false;
     }
     if (filters.stock === 'in' && product.stock <= 10) return false;
-    if (
-      filters.stock === 'low' &&
-      (product.stock === 0 || product.stock > 10)
-    ) {
+    if (filters.stock === 'low' && (product.stock === 0 || product.stock > 10)) {
       return false;
     }
     if (filters.stock === 'out' && product.stock !== 0) return false;
@@ -73,10 +60,7 @@ export default function AllProductsPage() {
   const [pageSize, setPageSize] = useState(10);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
 
-  const filtered = useMemo(
-    () => filterProducts(mockProducts, filters),
-    [filters]
-  );
+  const filtered = useMemo(() => filterProducts(mockProducts, filters), [filters]);
 
   const pageItems = useMemo(() => {
     const start = (page - 1) * pageSize;
@@ -84,8 +68,8 @@ export default function AllProductsPage() {
   }, [filtered, page, pageSize]);
 
   return (
-    <div className="flex gap-4 p-3 sm:p-4 lg:p-6">
-      <div className="min-w-0 flex-1 space-y-3 sm:space-y-4">
+    <div className='flex gap-4 p-3 sm:p-4 lg:p-6'>
+      <div className='min-w-0 flex-1 space-y-3 sm:space-y-4'>
         <ProductsPageHeader />
         <ProductStatCards />
         <ProductFilters
@@ -102,9 +86,7 @@ export default function AllProductsPage() {
             setSelectedIds(checked ? pageItems.map((p) => p.id) : []);
           }}
           onToggleOne={(id, checked) => {
-            setSelectedIds((prev) =>
-              checked ? [...prev, id] : prev.filter((x) => x !== id)
-            );
+            setSelectedIds((prev) => (checked ? [...prev, id] : prev.filter((x) => x !== id)));
           }}
         />
         <ProductsPagination
@@ -118,12 +100,12 @@ export default function AllProductsPage() {
           }}
         />
 
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:hidden">
+        <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 xl:hidden'>
           <RightRail />
         </div>
       </div>
 
-      <aside className="hidden w-70 shrink-0 space-y-4 self-start xl:block">
+      <aside className='hidden w-70 shrink-0 space-y-4 self-start xl:block'>
         <RightRail />
       </aside>
     </div>

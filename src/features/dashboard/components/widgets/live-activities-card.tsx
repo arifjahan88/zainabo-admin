@@ -1,11 +1,4 @@
-import {
-  BadgeCheck,
-  Headphones,
-  Package,
-  ShoppingBag,
-  Store,
-  type LucideIcon,
-} from 'lucide-react';
+import { BadgeCheck, Headphones, Package, ShoppingBag, Store, type LucideIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 import { Button } from '@/components/ui/button';
@@ -24,55 +17,41 @@ const toneStyles: Record<ActivityItem['tone'], string> = {
   cyan: 'bg-cyan-50 text-cyan-600',
 };
 
-const icons: LucideIcon[] = [
-  ShoppingBag,
-  Store,
-  Package,
-  BadgeCheck,
-  Headphones,
-];
+const icons: LucideIcon[] = [ShoppingBag, Store, Package, BadgeCheck, Headphones];
 
 export function LiveActivitiesCard() {
   return (
-    <Card className="shadow-none">
-      <CardHeader className="flex flex-row items-center justify-between gap-2 pb-2">
-        <CardTitle className="text-base font-semibold text-foreground">
-          Live Activities
-        </CardTitle>
+    <Card className='shadow-none'>
+      <CardHeader className='flex flex-row items-center justify-between gap-2 pb-2'>
+        <CardTitle className='text-base font-semibold text-foreground'>Live Activities</CardTitle>
         <Button
-          variant="link"
-          size="sm"
-          className="h-auto px-0 text-primary"
+          variant='link'
+          size='sm'
+          className='h-auto px-0 text-primary'
           nativeButton={false}
           render={<Link to={URLAnalytics()} />}
         >
           View All
         </Button>
       </CardHeader>
-      <CardContent className="space-y-3">
+      <CardContent className='space-y-3'>
         {liveActivities.map((activity, index) => {
           const Icon = icons[index % icons.length];
 
           return (
-            <div key={activity.id} className="flex gap-3">
+            <div key={activity.id} className='flex gap-3'>
               <span
                 className={cn(
                   'mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-full',
                   toneStyles[activity.tone]
                 )}
               >
-                <Icon className="size-3.5" />
+                <Icon className='size-3.5' />
               </span>
-              <div className="min-w-0 flex-1">
-                <p className="text-sm font-medium text-foreground">
-                  {activity.title}
-                </p>
-                <p className="truncate text-xs text-muted-foreground">
-                  {activity.description}
-                </p>
-                <p className="mt-0.5 text-[11px] text-muted-foreground/80">
-                  {activity.time}
-                </p>
+              <div className='min-w-0 flex-1'>
+                <p className='text-sm font-medium text-foreground'>{activity.title}</p>
+                <p className='truncate text-xs text-muted-foreground'>{activity.description}</p>
+                <p className='mt-0.5 text-[11px] text-muted-foreground/80'>{activity.time}</p>
               </div>
             </div>
           );

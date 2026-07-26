@@ -1,10 +1,4 @@
-import {
-  ClipboardList,
-  PackageCheck,
-  Ticket,
-  Wallet,
-  type LucideIcon,
-} from 'lucide-react';
+import { ClipboardList, PackageCheck, Ticket, Wallet, type LucideIcon } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 import { Card, CardContent } from '@/components/ui/card';
@@ -29,32 +23,28 @@ const iconMap: Record<string, LucideIcon> = {
 
 export function PendingTasksRow() {
   return (
-    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
+    <div className='grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4'>
       {pendingTasks.map((task) => {
         const Icon = iconMap[task.id] ?? ClipboardList;
 
         return (
-          <Card key={task.id} className="shadow-none">
-            <CardContent className="flex items-center gap-3 py-4">
+          <Card key={task.id} className='shadow-none'>
+            <CardContent className='flex items-center gap-3 py-4'>
               <span
                 className={cn(
                   'flex size-11 shrink-0 items-center justify-center rounded-xl',
                   toneStyles[task.tone]
                 )}
               >
-                <Icon className="size-5" />
+                <Icon className='size-5' />
               </span>
-              <div className="min-w-0 flex-1">
-                <p className="truncate text-sm text-muted-foreground">
-                  {task.title}
-                </p>
-                <p className="text-2xl font-bold tracking-tight text-foreground">
-                  {task.count}
-                </p>
+              <div className='min-w-0 flex-1'>
+                <p className='truncate text-sm text-muted-foreground'>{task.title}</p>
+                <p className='text-2xl font-bold tracking-tight text-foreground'>{task.count}</p>
               </div>
               <Link
                 to={task.to}
-                className="shrink-0 text-sm font-medium text-primary hover:underline"
+                className='shrink-0 text-sm font-medium text-primary hover:underline'
               >
                 View All
               </Link>

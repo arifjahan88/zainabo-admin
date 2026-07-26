@@ -31,35 +31,29 @@ const statusLabels: Record<OrderStatus, string> = {
 
 export function RecentOrdersTable() {
   return (
-    <Card className="shadow-none">
-      <CardHeader className="pb-2">
-        <CardTitle className="text-base font-semibold text-foreground">
-          Recent Orders
-        </CardTitle>
+    <Card className='shadow-none'>
+      <CardHeader className='pb-2'>
+        <CardTitle className='text-base font-semibold text-foreground'>Recent Orders</CardTitle>
       </CardHeader>
-      <CardContent className="px-0">
+      <CardContent className='px-0'>
         <Table>
           <TableHeader>
-            <TableRow className="hover:bg-transparent">
-              <TableHead className="pl-4">Order ID</TableHead>
+            <TableRow className='hover:bg-transparent'>
+              <TableHead className='pl-4'>Order ID</TableHead>
               <TableHead>Customer</TableHead>
-              <TableHead className="hidden md:table-cell">Seller</TableHead>
+              <TableHead className='hidden md:table-cell'>Seller</TableHead>
               <TableHead>Amount</TableHead>
               <TableHead>Status</TableHead>
-              <TableHead className="hidden pr-4 lg:table-cell">Date</TableHead>
+              <TableHead className='hidden pr-4 lg:table-cell'>Date</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {recentOrders.map((order) => (
               <TableRow key={order.id}>
-                <TableCell className="pl-4 font-medium text-foreground">
-                  {order.orderId}
-                </TableCell>
+                <TableCell className='pl-4 font-medium text-foreground'>{order.orderId}</TableCell>
                 <TableCell>{order.customer}</TableCell>
-                <TableCell className="hidden md:table-cell">
-                  {order.seller}
-                </TableCell>
-                <TableCell className="font-medium">{order.amount}</TableCell>
+                <TableCell className='hidden md:table-cell'>{order.seller}</TableCell>
+                <TableCell className='font-medium'>{order.amount}</TableCell>
                 <TableCell>
                   <span
                     className={cn(
@@ -70,7 +64,7 @@ export function RecentOrdersTable() {
                     {statusLabels[order.status]}
                   </span>
                 </TableCell>
-                <TableCell className="hidden pr-4 text-muted-foreground lg:table-cell">
+                <TableCell className='hidden pr-4 text-muted-foreground lg:table-cell'>
                   {order.date}
                 </TableCell>
               </TableRow>

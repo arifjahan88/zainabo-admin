@@ -1,10 +1,5 @@
 import type { PendingTask } from '@/features/dashboard/types';
-import {
-  URLFinance,
-  URLProductsPending,
-  URLStoreSettings,
-  URLSupport,
-} from '@/routes/routes.url';
+import { URLFinance, URLProductsPending, URLStoreSettings, URLSupport } from '@/routes/routes.url';
 
 export const pendingTasks: PendingTask[] = [
   {
