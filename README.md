@@ -1,75 +1,174 @@
-# React + TypeScript + Vite
+# Zainabo Seller Center
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern **seller marketplace admin UI** for managing catalog, orders insights, and store operations. Built as a responsive React SPA with a fixed dashboard shell (sidebar + header) and feature-based pages.
 
-Currently, two official plugins are available:
+> Demo app with **dummy data only** — no backend or real API yet.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## What you can do
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+| Area | Status | Description |
+|------|--------|-------------|
+| **Dashboard** | Built | KPI cards, revenue & order charts, recent orders, live activity rail, pending tasks |
+| **All Products** | Built | Search/filter catalog, stats, table, pagination, right-rail widgets |
+| **Other nav routes** | Coming soon | Orders, inventory, delivery, marketing, customers, analytics, finance, reports, settings, support |
 
-Note: This will impact Vite dev & build performances.
+Default route: `/` → `/dashboard`
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Tech stack
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **React 19** + **TypeScript** + **Vite 8**
+- **React Router 7** (`createBrowserRouter`)
+- **Tailwind CSS 4** + **shadcn/ui** (`base-nova` / Base UI)
+- **Recharts** — dashboard charts & KPI sparklines
+- **react-day-picker** + **date-fns** — date range picker
+- **Lucide React** — icons
+- **Inter Variable** — typography
+- **React Compiler** enabled via Babel
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+## Getting started
+
+### Requirements
+
+- Node.js 20+ recommended  
+- Yarn (or npm/pnpm)
+
+### Install & run
+
+```bash
+yarn
+yarn dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+App runs at `http://localhost:5173` (Vite default).
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x';
-import reactDom from 'eslint-plugin-react-dom';
+### Other scripts
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+| Command | Purpose |
+|---------|---------|
+| `yarn build` | Typecheck + production build → `dist/` |
+| `yarn build:test` | TypeScript only (`tsc -b`) |
+| `yarn preview` | Preview production build |
+| `yarn lint` | ESLint |
+| `yarn format` | Prettier write |
+| `yarn format:check` | Prettier check |
+
+---
+
+## Project structure
+
 ```
+src/
+├── App.tsx                 # RouterProvider + TooltipProvider
+├── main.tsx
+├── index.css               # Tailwind + design tokens (brand red, sidebar)
+├── routes/
+│   ├── router.tsx          # Route tree + lazy pages
+│   └── routes.url.ts       # Central URL helpers (URLProducts, URLDashboard, …)
+├── layouts/
+│   ├── dashboard-layout.tsx
+│   └── components/         # Sidebar, header, nav config, promo
+├── features/
+│   ├── dashboard/          # Dashboard page, charts, widgets, mock data
+│   ├── products/           # All Products page, table, filters, widgets
+│   └── common/             # Shared Coming Soon page
+├── components/
+│   ├── ui/                 # shadcn primitives (button, table, sidebar, …)
+│   └── shared/             # PageLoader, StatusBadge, shell loader
+├── lib/
+│   ├── loadable.tsx        # lazy() + Suspense helper
+│   └── utils.ts            # cn()
+└── hooks/
+    └── use-mobile.ts
+```
+
+### Conventions
+
+- **Feature folders** — `pages/`, `components/`, `data/`, `types.ts`
+- **Routes** — always use helpers from `src/routes/routes.url.ts` (no hardcoded paths)
+- **Lazy loading** — layout, pages, and heavy chart chunks via `loadable()`
+- **Dummy data** — under each feature’s `data/` folder
+
+---
+
+## Key screens
+
+### Dashboard (`/dashboard`)
+
+- Date range picker + settings toolbar  
+- 5 KPI cards with sparklines (tooltips on hover)  
+- Revenue overview (this week vs last week)  
+- Order status & sales-by-channel donuts  
+- Recent orders table + pending task cards  
+- Right rail: live activities, system status, top categories  
+
+Chart components on this page are code-split separately.
+
+### All Products (`/products`)
+
+- Header actions (export / import / add)  
+- Product stat cards  
+- Search + category / brand / status / stock filters  
+- Selectable products table + pagination  
+- Right rail: completion, help, quick actions, tips  
+
+Responsive: stacks filters and hides secondary table columns on smaller screens; right rail moves below content below `xl`.
+
+### Shell
+
+- Dark sidebar (`#00143b`) with expandable Products menu  
+- Header: breadcrumbs, global search (`⌘/Ctrl + K`), country/language, notifications, user menu  
+
+---
+
+## Routing
+
+All path strings live in [`src/routes/routes.url.ts`](src/routes/routes.url.ts):
+
+```ts
+URLDashboard()  // '/dashboard'
+URLProducts()   // '/products'
+URLOrders()     // '/orders'
+// …
+```
+
+Router: [`src/routes/router.tsx`](src/routes/router.tsx)
+
+- `/` redirects to dashboard  
+- Built pages: dashboard, products  
+- Other sidebar links → Coming Soon  
+- Unknown paths → dashboard  
+
+---
+
+## UI & theming
+
+- Design tokens in `src/index.css` (`--primary` brand red, sidebar colors, chart vars)  
+- Components via shadcn (`components.json` → `base-nova`)  
+- Path alias: `@/` → `src/`  
+
+To add a UI piece:
+
+```bash
+npx shadcn@latest add <component>
+```
+
+---
+
+## Notes for contributors
+
+1. Prefer extending an existing feature folder over adding new top-level pages.  
+2. Keep new links/paths in `routes.url.ts` and wire them in `router.tsx` + `nav-config.ts`.  
+3. Use `loadable()` for new route-level or heavy chart modules.  
+4. Dummy data is intentional — swap `data/` modules when connecting a real API.  
+
+---
+
+## License
+
+Private demo project (`"private": true` in `package.json`).
