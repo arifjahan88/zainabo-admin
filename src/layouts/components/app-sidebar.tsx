@@ -35,26 +35,23 @@ export function AppSidebar() {
   };
 
   return (
-    <Sidebar collapsible="icon" className="border-r border-sidebar-border">
-      <SidebarHeader className="gap-0 border-b border-sidebar-border px-3 py-4">
+    <Sidebar collapsible='icon' className='border-r border-sidebar-border'>
+      <SidebarHeader className='gap-0 border-b border-sidebar-border px-3 py-4'>
         <Link
-          to="/products"
-          className="flex items-center gap-2 overflow-hidden px-1 group-data-[collapsible=icon]:justify-center"
+          to='/products'
+          className='flex items-center gap-2 overflow-hidden px-1 group-data-[collapsible=icon]:justify-center'
         >
-          <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary text-sm font-bold text-primary-foreground">
+          <span className='flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary text-sm font-bold text-primary-foreground'>
             Z
           </span>
-          <span className="truncate text-sm font-semibold tracking-tight text-sidebar-foreground group-data-[collapsible=icon]:hidden">
-            Zainabo{' '}
-            <span className="font-normal text-sidebar-foreground/70">
-              Seller Center
-            </span>
+          <span className='truncate text-sm font-semibold tracking-tight text-sidebar-foreground group-data-[collapsible=icon]:hidden'>
+            Zainabo <span className='font-normal text-sidebar-foreground/70'>Seller Center</span>
           </span>
         </Link>
       </SidebarHeader>
 
-      <SidebarContent className="px-2 py-3">
-        <SidebarMenu className="gap-0.5">
+      <SidebarContent className='px-2 py-3'>
+        <SidebarMenu className='gap-0.5'>
           {navItems.map((item) => {
             const hasChildren = Boolean(item.children?.length);
             const sectionActive = isPathActive(pathname, item.path);
@@ -94,7 +91,7 @@ export function AppSidebar() {
                   onClick={() => toggleMenu(item.title)}
                 >
                   <Icon />
-                  <span className="flex-1">{item.title}</span>
+                  <span className='flex-1'>{item.title}</span>
                   <ChevronDown
                     className={cn(
                       'ml-auto size-4 transition-transform',
@@ -105,7 +102,7 @@ export function AppSidebar() {
                 </SidebarMenuButton>
 
                 {isOpen ? (
-                  <SidebarMenuSub className="mx-0 ml-3.5 border-l border-sidebar-border px-0 py-1 pl-3 group-data-[collapsible=icon]:hidden">
+                  <SidebarMenuSub className='mx-0 ml-3.5 border-l border-sidebar-border px-0 py-1 pl-3 group-data-[collapsible=icon]:hidden'>
                     {item.children!.map((child) => {
                       const childActive =
                         child.path === '/products'
@@ -116,11 +113,10 @@ export function AppSidebar() {
                         <SidebarMenuSubItem key={child.path}>
                           <SidebarMenuSubButton
                             isActive={childActive}
-                            size="sm"
+                            size='sm'
                             className={cn(
                               'h-8 gap-2 text-sidebar-foreground/65 hover:text-sidebar-foreground',
-                              childActive &&
-                                'font-medium text-primary data-active:text-primary'
+                              childActive && 'font-medium text-primary data-active:text-primary'
                             )}
                             render={<Link to={child.path} />}
                           >
@@ -130,11 +126,9 @@ export function AppSidebar() {
                                 childActive && 'bg-primary'
                               )}
                             />
-                            <span className="flex-1 truncate">
-                              {child.title}
-                            </span>
+                            <span className='flex-1 truncate'>{child.title}</span>
                             {child.badge != null ? (
-                              <span className="rounded-md bg-sidebar-accent px-1.5 text-[10px] font-medium text-sidebar-foreground/70">
+                              <span className='rounded-md bg-sidebar-accent px-1.5 text-[10px] font-medium text-sidebar-foreground/70'>
                                 {child.badge}
                               </span>
                             ) : null}
@@ -150,7 +144,7 @@ export function AppSidebar() {
         </SidebarMenu>
       </SidebarContent>
 
-      <SidebarFooter className="p-0 group-data-[collapsible=icon]:hidden">
+      <SidebarFooter className='p-0 group-data-[collapsible=icon]:hidden'>
         <SidebarPromo />
       </SidebarFooter>
       <SidebarRail />

@@ -37,17 +37,17 @@ export function ProductsPagination({
   const pages = Array.from({ length: Math.min(totalPages, 3) }, (_, i) => i + 1);
 
   return (
-    <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-      <p className="text-sm text-muted-foreground">
+    <div className='flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between'>
+      <p className='text-sm text-muted-foreground'>
         Showing {from} to {to} of {total} products
       </p>
 
-      <div className="flex flex-wrap items-center gap-3">
-        <Pagination className="mx-0 w-auto">
+      <div className='flex flex-wrap items-center gap-3'>
+        <Pagination className='mx-0 w-auto'>
           <PaginationContent>
             <PaginationItem>
               <PaginationPrevious
-                href="#"
+                href='#'
                 onClick={(e) => {
                   e.preventDefault();
                   onPageChange(Math.max(1, page - 1));
@@ -59,7 +59,7 @@ export function ProductsPagination({
             {pages.map((p) => (
               <PaginationItem key={p}>
                 <PaginationLink
-                  href="#"
+                  href='#'
                   isActive={p === page}
                   onClick={(e) => {
                     e.preventDefault();
@@ -78,7 +78,7 @@ export function ProductsPagination({
                 </PaginationItem>
                 <PaginationItem>
                   <PaginationLink
-                    href="#"
+                    href='#'
                     isActive={page === totalPages}
                     onClick={(e) => {
                       e.preventDefault();
@@ -93,30 +93,25 @@ export function ProductsPagination({
 
             <PaginationItem>
               <PaginationNext
-                href="#"
+                href='#'
                 onClick={(e) => {
                   e.preventDefault();
                   onPageChange(Math.min(totalPages, page + 1));
                 }}
-                className={
-                  page >= totalPages ? 'pointer-events-none opacity-50' : ''
-                }
+                className={page >= totalPages ? 'pointer-events-none opacity-50' : ''}
               />
             </PaginationItem>
           </PaginationContent>
         </Pagination>
 
-        <Select
-          value={String(pageSize)}
-          onValueChange={(v) => onPageSizeChange(Number(v ?? 10))}
-        >
-          <SelectTrigger className="h-8 w-[100px]">
+        <Select value={String(pageSize)} onValueChange={(v) => onPageSizeChange(Number(v ?? 10))}>
+          <SelectTrigger className='h-8 w-25'>
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="10">10 / page</SelectItem>
-            <SelectItem value="20">20 / page</SelectItem>
-            <SelectItem value="50">50 / page</SelectItem>
+            <SelectItem value='10'>10 / page</SelectItem>
+            <SelectItem value='20'>20 / page</SelectItem>
+            <SelectItem value='50'>50 / page</SelectItem>
           </SelectContent>
         </Select>
       </div>

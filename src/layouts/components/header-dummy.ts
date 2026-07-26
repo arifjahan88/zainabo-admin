@@ -1,8 +1,7 @@
 export const headerDummy = {
   storeName: 'Zainabo Fashion',
   sellerId: 'ZB12345',
-  avatarUrl:
-    'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop',
+  avatarUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop',
   locale: 'English',
   countryCode: 'TH',
   messageCount: 3,

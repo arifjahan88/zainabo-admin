@@ -5,29 +5,29 @@ import { Button } from '@/components/ui/button';
 
 export function ProductsPageHeader() {
   return (
-    <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+    <div className='flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between'>
       <div>
-        <h1 className="text-2xl font-semibold tracking-tight">All Products</h1>
-        <p className="mt-1 text-sm text-muted-foreground">
+        <h1 className='text-2xl font-semibold tracking-tight'>All Products</h1>
+        <p className='mt-1 text-sm text-muted-foreground'>
           Manage your catalog, stock levels, and listing status in one place.
         </p>
       </div>
-      <div className="flex flex-wrap items-center gap-2">
-        <Button variant="outline" size="sm" className="h-9 gap-1.5">
-          <Download className="size-4" />
+      <div className='flex flex-wrap items-center gap-2'>
+        <Button variant='outline' size='sm' className='h-9 gap-1.5'>
+          <Download className='size-4' />
           Export
         </Button>
-        <Button variant="outline" size="sm" className="h-9 gap-1.5">
-          <Upload className="size-4" />
+        <Button variant='outline' size='sm' className='h-9 gap-1.5'>
+          <Upload className='size-4' />
           Import
         </Button>
         <Button
-          size="sm"
-          className="h-9 gap-1.5"
+          size='sm'
+          className='h-9 gap-1.5'
           nativeButton={false}
-          render={<Link to="/products/new" />}
+          render={<Link to='/products/new' />}
         >
-          <Plus className="size-4" />
+          <Plus className='size-4' />
           Add New Product
         </Button>
       </div>

@@ -1,11 +1,4 @@
-import {
-  CirclePlus,
-  CloudUpload,
-  Package,
-  Shield,
-  Star,
-  Tag,
-} from 'lucide-react';
+import { CirclePlus, CloudUpload, Package, Shield, Star, Tag } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -52,14 +45,12 @@ const actions = [
 
 export function QuickActionsCard() {
   return (
-    <Card className="shadow-none">
-      <CardHeader className="pb-0">
-        <CardTitle className="text-base font-semibold text-slate-900">
-          Quick Actions
-        </CardTitle>
+    <Card className='shadow-none'>
+      <CardHeader className='pb-0'>
+        <CardTitle className='text-base font-semibold text-slate-900'>Quick Actions</CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="grid grid-cols-3 gap-2">
+        <div className='grid grid-cols-3 gap-2'>
           {actions.map((action) => {
             const Icon = action.icon;
             return (
@@ -72,7 +63,7 @@ export function QuickActionsCard() {
                 )}
               >
                 <Icon className={cn('size-5', action.color.split(' ')[1])} />
-                <span className="text-[10px] leading-tight font-medium text-slate-800">
+                <span className='text-[10px] leading-tight font-medium text-slate-800'>
                   {action.title}
                 </span>
               </Link>

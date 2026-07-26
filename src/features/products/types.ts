@@ -1,9 +1,4 @@
-export type ProductStatus =
-  | 'published'
-  | 'low_stock'
-  | 'out_of_stock'
-  | 'pending'
-  | 'draft';
+export type ProductStatus = 'published' | 'low_stock' | 'out_of_stock' | 'pending' | 'draft';
 
 export type Product = {
   id: string;
@@ -19,19 +14,9 @@ export type Product = {
   createdAt: string;
 };
 
-export type ProductStatTone =
-  | 'blue'
-  | 'green'
-  | 'orange'
-  | 'red'
-  | 'purple';
+export type ProductStatTone = 'blue' | 'green' | 'orange' | 'red' | 'purple';
 
-export type ProductStatIcon =
-  | 'package'
-  | 'check'
-  | 'clock'
-  | 'package-x'
-  | 'file';
+export type ProductStatIcon = 'package' | 'check' | 'clock' | 'package-x' | 'file';
 
 export type ProductStat = {
   id: string;

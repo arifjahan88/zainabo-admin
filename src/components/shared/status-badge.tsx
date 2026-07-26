@@ -1,10 +1,7 @@
 import { cn } from '@/lib/utils';
 import type { ProductStatus } from '@/features/products/types';
 
-const statusConfig: Record<
-  ProductStatus,
-  { label: string; className: string }
-> = {
+const statusConfig: Record<ProductStatus, { label: string; className: string }> = {
   published: {
     label: 'Published',
     className: 'bg-emerald-50 text-emerald-700 ring-emerald-600/15',

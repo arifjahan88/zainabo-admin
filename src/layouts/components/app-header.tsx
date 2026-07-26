@@ -137,7 +137,7 @@ export function AppHeader() {
               />
             }
           >
-            <ThailandFlag className='h-3.5 w-5 rounded-[2px]' />
+            <ThailandFlag className='h-3.5 w-5 rounded-xs' />
             <span className='text-muted-foreground'>ไทย</span>
             <Languages className='size-3.5 text-muted-foreground' />
             <span>{locale}</span>

@@ -32,19 +32,18 @@ export function ProductsTable({
   onToggleAll,
   onToggleOne,
 }: ProductsTableProps) {
-  const allSelected =
-    products.length > 0 && products.every((p) => selectedIds.includes(p.id));
+  const allSelected = products.length > 0 && products.every((p) => selectedIds.includes(p.id));
 
   return (
-    <div className="overflow-hidden rounded-xl bg-card ring-1 ring-foreground/10">
+    <div className='overflow-hidden rounded-xl bg-card ring-1 ring-foreground/10'>
       <Table>
         <TableHeader>
-          <TableRow className="hover:bg-transparent">
-            <TableHead className="w-10">
+          <TableRow className='hover:bg-transparent'>
+            <TableHead className='w-10'>
               <Checkbox
                 checked={allSelected}
                 onCheckedChange={(checked) => onToggleAll(Boolean(checked))}
-                aria-label="Select all"
+                aria-label='Select all'
               />
             </TableHead>
             <TableHead>Product</TableHead>
@@ -54,7 +53,7 @@ export function ProductsTable({
             <TableHead>Stock</TableHead>
             <TableHead>Status</TableHead>
             <TableHead>Created At</TableHead>
-            <TableHead className="w-28 text-right">Actions</TableHead>
+            <TableHead className='w-28 text-right'>Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -66,56 +65,48 @@ export function ProductsTable({
                 <TableCell>
                   <Checkbox
                     checked={selected}
-                    onCheckedChange={(checked) =>
-                      onToggleOne(product.id, Boolean(checked))
-                    }
+                    onCheckedChange={(checked) => onToggleOne(product.id, Boolean(checked))}
                     aria-label={`Select ${product.name}`}
                   />
                 </TableCell>
                 <TableCell>
-                  <div className="flex items-center gap-3">
+                  <div className='flex items-center gap-3'>
                     <img
                       src={product.image}
-                      alt=""
-                      className="size-10 rounded-lg object-cover ring-1 ring-border"
+                      alt=''
+                      className='size-10 rounded-lg object-cover ring-1 ring-border'
                     />
-                    <div className="min-w-0">
-                      <p className="truncate font-medium">{product.name}</p>
-                      <p className="truncate text-xs text-muted-foreground">
-                        {product.variant}
-                      </p>
+                    <div className='min-w-0'>
+                      <p className='truncate font-medium'>{product.name}</p>
+                      <p className='truncate text-xs text-muted-foreground'>{product.variant}</p>
                     </div>
                   </div>
                 </TableCell>
-                <TableCell className="font-mono text-xs text-muted-foreground">
+                <TableCell className='font-mono text-xs text-muted-foreground'>
                   {product.sku}
                 </TableCell>
                 <TableCell>{product.category}</TableCell>
-                <TableCell className="font-medium">
-                  ${product.price.toFixed(2)}
-                </TableCell>
+                <TableCell className='font-medium'>${product.price.toFixed(2)}</TableCell>
                 <TableCell>{product.stock}</TableCell>
                 <TableCell>
                   <StatusBadge status={product.status} />
                 </TableCell>
-                <TableCell className="text-muted-foreground">
-                  {product.createdAt}
-                </TableCell>
+                <TableCell className='text-muted-foreground'>{product.createdAt}</TableCell>
                 <TableCell>
-                  <div className="flex items-center justify-end gap-0.5">
+                  <div className='flex items-center justify-end gap-0.5'>
                     <Button
-                      variant="ghost"
-                      size="icon-sm"
-                      className="text-muted-foreground"
-                      aria-label="View"
+                      variant='ghost'
+                      size='icon-sm'
+                      className='text-muted-foreground'
+                      aria-label='View'
                     >
                       <Eye />
                     </Button>
                     <Button
-                      variant="ghost"
-                      size="icon-sm"
-                      className="text-muted-foreground"
-                      aria-label="Edit"
+                      variant='ghost'
+                      size='icon-sm'
+                      className='text-muted-foreground'
+                      aria-label='Edit'
                     >
                       <Pencil />
                     </Button>
@@ -123,21 +114,19 @@ export function ProductsTable({
                       <DropdownMenuTrigger
                         render={
                           <Button
-                            variant="ghost"
-                            size="icon-sm"
-                            className="text-muted-foreground"
-                            aria-label="More actions"
+                            variant='ghost'
+                            size='icon-sm'
+                            className='text-muted-foreground'
+                            aria-label='More actions'
                           />
                         }
                       >
                         <MoreHorizontal />
                       </DropdownMenuTrigger>
-                      <DropdownMenuContent align="end">
+                      <DropdownMenuContent align='end'>
                         <DropdownMenuItem>Duplicate</DropdownMenuItem>
                         <DropdownMenuItem>Archive</DropdownMenuItem>
-                        <DropdownMenuItem className="text-destructive">
-                          Delete
-                        </DropdownMenuItem>
+                        <DropdownMenuItem className='text-destructive'>Delete</DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
                   </div>
