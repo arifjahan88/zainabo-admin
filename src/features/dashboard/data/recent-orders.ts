@@ -1,0 +1,58 @@
+import type { RecentOrder } from '@/features/dashboard/types';
+
+export const recentOrders: RecentOrder[] = [
+  {
+    id: '1',
+    orderId: '#ZB-94821',
+    customer: 'Sarah Johnson',
+    seller: 'Fashion Hub',
+    amount: '$245.00',
+    status: 'new',
+    date: 'May 25, 2024',
+  },
+  {
+    id: '2',
+    orderId: '#ZB-94820',
+    customer: 'Michael Chen',
+    seller: 'TechGadgets',
+    amount: '$1,290.00',
+    status: 'processing',
+    date: 'May 25, 2024',
+  },
+  {
+    id: '3',
+    orderId: '#ZB-94819',
+    customer: 'Emily Davis',
+    seller: 'BeautyBox',
+    amount: '$89.50',
+    status: 'shipped',
+    date: 'May 24, 2024',
+  },
+  {
+    id: '4',
+    orderId: '#ZB-94818',
+    customer: 'James Wilson',
+    seller: 'HomeStyle',
+    amount: '$456.00',
+    status: 'delivered',
+    date: 'May 24, 2024',
+  },
+  {
+    id: '5',
+    orderId: '#ZB-94817',
+    customer: 'Olivia Brown',
+    seller: 'SportZone',
+    amount: '$178.25',
+    status: 'packed',
+    date: 'May 23, 2024',
+  },
+  {
+    id: '6',
+    orderId: '#ZB-94816',
+    customer: 'Liam Martinez',
+    seller: 'Fashion Hub',
+    amount: '$62.00',
+    status: 'cancelled',
+    date: 'May 23, 2024',
+  },
+];

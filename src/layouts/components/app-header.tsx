@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import {
   Bell,
   ChevronDown,
   LogOut,
   MessageSquare,
+  Search,
   Settings,
   Store,
   TableOfContents,
@@ -31,6 +32,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
 import { useSidebar } from '@/components/ui/sidebar';
 import {
@@ -91,6 +93,7 @@ export function AppHeader() {
   const { toggleSidebar } = useSidebar();
   const { pathname } = useLocation();
   const breadcrumbItems = buildBreadcrumbs(pathname);
+  const searchRef = useRef<HTMLInputElement>(null);
   const [country, setCountry] = useState(headerDummy.countryCode);
   const [locale, setLocale] = useState(headerDummy.locale);
   const [notifications, setNotifications] = useState(notificationItems);
@@ -98,6 +101,20 @@ export function AppHeader() {
   const unreadCount = notifications.filter((n) => n.unread).length;
   const selectedCountry =
     countryOptions.find((option) => option.code === country) ?? countryOptions[0];
+
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (!(event.metaKey || event.ctrlKey)) return;
+      if (event.key.toLowerCase() !== 'k') return;
+
+      event.preventDefault();
+      searchRef.current?.focus();
+      searchRef.current?.select();
+    };
+
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, []);
 
   return (
     <header className='z-20 flex h-14 shrink-0 items-center gap-3 border-b border-border bg-card px-4'>
@@ -117,7 +134,7 @@ export function AppHeader() {
           className='mr-1 h-4 data-vertical:h-4 data-vertical:self-center'
         />
 
-        <Breadcrumb>
+        <Breadcrumb className='min-w-0'>
           <BreadcrumbList>
             {breadcrumbItems.map((item, index) => (
               <span key={`${item.href}-${item.label}`} className='contents'>
@@ -135,7 +152,31 @@ export function AppHeader() {
         </Breadcrumb>
       </div>
 
+      <div className="relative hidden w-full max-w-md flex-1 md:block">
+        <Search className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" />
+        <Input
+          ref={searchRef}
+          type="search"
+          placeholder="Search anything..."
+          className="h-9 rounded-md border-border bg-muted/40 pr-16 pl-9 shadow-none"
+          aria-label="Search"
+          aria-keyshortcuts="Meta+K Control+K"
+        />
+        <kbd className="pointer-events-none absolute top-1/2 right-2.5 hidden -translate-y-1/2 items-center gap-0.5 rounded-md border border-border bg-card px-1.5 py-0.5 font-sans text-[10px] font-medium text-muted-foreground sm:inline-flex">
+          ⌘ K
+        </kbd>
+      </div>
+
       <div className='flex items-center gap-1 sm:gap-2'>
+        <Button
+          variant='ghost'
+          size='icon'
+          className='size-8 text-muted-foreground md:hidden'
+          aria-label='Search'
+        >
+          <Search className='size-4' />
+        </Button>
+
         <div className='hidden items-center sm:flex'>
           <DropdownMenu>
             <DropdownMenuTrigger

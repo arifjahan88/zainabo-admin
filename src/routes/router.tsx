@@ -27,8 +27,15 @@ import {
 const DashboardLayout = loadable(() => import('@/layouts/dashboard-layout'), {
   fallback: <DashboardShellLoader />,
 });
-const AllProductsPage = loadable(() => import('@/features/products/pages/all-products-page'));
-const ComingSoonPage = loadable(() => import('@/features/common/pages/coming-soon-page'));
+const DashboardPage = loadable(
+  () => import('@/features/dashboard/pages/dashboard-page')
+);
+const AllProductsPage = loadable(
+  () => import('@/features/products/pages/all-products-page')
+);
+const ComingSoonPage = loadable(
+  () => import('@/features/common/pages/coming-soon-page')
+);
 
 export const router = createBrowserRouter([
   {
@@ -45,7 +52,7 @@ export const router = createBrowserRouter([
       },
       {
         path: URLDashboard(),
-        element: <ComingSoonPage />,
+        element: <DashboardPage />,
       },
       {
         path: URLProductsNew(),
