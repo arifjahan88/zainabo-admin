@@ -14,6 +14,27 @@ import {
   Headset,
 } from 'lucide-react';
 
+import {
+  URLAnalytics,
+  URLCustomers,
+  URLDashboard,
+  URLDelivery,
+  URLFinance,
+  URLInventory,
+  URLMarketing,
+  URLOrders,
+  URLProducts,
+  URLProductsBulkUpload,
+  URLProductsDrafts,
+  URLProductsNew,
+  URLProductsPending,
+  URLProductsPublished,
+  URLProductsRejected,
+  URLReports,
+  URLStoreSettings,
+  URLSupport,
+} from '@/routes/routes.url';
+
 export type NavChild = {
   title: string;
   path: string;
@@ -30,71 +51,79 @@ export type NavItem = {
 export const navItems: NavItem[] = [
   {
     title: 'Dashboard',
-    path: '/dashboard',
+    path: URLDashboard(),
     icon: LayoutDashboard,
   },
   {
     title: 'Products',
-    path: '/products',
+    path: URLProducts(),
     icon: Package,
     children: [
-      { title: 'All Products', path: '/products' },
-      { title: 'Add New Product', path: '/products/new' },
-      { title: 'Bulk Upload', path: '/products/bulk-upload' },
-      { title: 'Drafts', path: '/products/drafts', badge: 12 },
-      { title: 'Pending Approval', path: '/products/pending', badge: 8 },
-      { title: 'Published', path: '/products/published', badge: 166 },
-      { title: 'Rejected', path: '/products/rejected', badge: 3 },
+      { title: 'All Products', path: URLProducts() },
+      { title: 'Add New Product', path: URLProductsNew() },
+      { title: 'Bulk Upload', path: URLProductsBulkUpload() },
+      { title: 'Drafts', path: URLProductsDrafts(), badge: 12 },
+      {
+        title: 'Pending Approval',
+        path: URLProductsPending(),
+        badge: 8,
+      },
+      {
+        title: 'Published',
+        path: URLProductsPublished(),
+        badge: 156,
+      },
+      { title: 'Rejected', path: URLProductsRejected(), badge: 3 },
     ],
   },
   {
     title: 'Orders',
-    path: '/orders',
+    path: URLOrders(),
     icon: ShoppingCart,
   },
   {
     title: 'Inventory',
-    path: '/inventory',
+    path: URLInventory(),
     icon: Warehouse,
   },
   {
     title: 'Delivery',
-    path: '/delivery',
+    path: URLDelivery(),
     icon: Truck,
   },
   {
     title: 'Marketing',
-    path: '/marketing',
+    path: URLMarketing(),
     icon: Megaphone,
   },
   {
     title: 'Customers',
-    path: '/customers',
+    path: URLCustomers(),
     icon: Users,
   },
   {
     title: 'Analytics',
-    path: '/analytics',
+    path: URLAnalytics(),
     icon: BarChart3,
   },
   {
     title: 'Finance',
-    path: '/finance',
+    path: URLFinance(),
     icon: Wallet,
   },
   {
     title: 'Reports',
-    path: '/reports',
+    path: URLReports(),
     icon: FileText,
   },
   {
     title: 'Store Settings',
-    path: '/store-settings',
+    path: URLStoreSettings(),
     icon: Store,
   },
   {
     title: 'Support',
-    path: '/support',
+    path: URLSupport(),
     icon: Headset,
   },
 ];

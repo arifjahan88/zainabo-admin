@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import { URLSupport } from '@/routes/routes.url';
 
 function SupportIllustration({ className }: { className?: string }) {
   return (
@@ -58,7 +59,7 @@ export function NeedHelpCard() {
             variant='outline'
             className='h-8 gap-1.5 border-primary bg-white text-primary hover:bg-white hover:text-primary'
             nativeButton={false}
-            render={<Link to='/support' />}
+            render={<Link to={URLSupport()} />}
           >
             <Headset className='size-3.5' />
             Contact Support

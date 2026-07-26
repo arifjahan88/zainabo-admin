@@ -3,12 +3,11 @@ import { Link, useLocation } from 'react-router-dom';
 import {
   Bell,
   ChevronDown,
-  Languages,
   LogOut,
   MessageSquare,
-  PanelLeft,
   Settings,
   Store,
+  TableOfContents,
   Wallet,
 } from 'lucide-react';
 
@@ -35,6 +34,7 @@ import {
 import { Separator } from '@/components/ui/separator';
 import { useSidebar } from '@/components/ui/sidebar';
 import {
+  countryOptions,
   headerDummy,
   languageOptions,
   notificationItems,
@@ -42,13 +42,19 @@ import {
 } from '@/layouts/components/header-dummy';
 import { breadcrumbLabels } from '@/layouts/components/nav-config';
 import { cn } from '@/lib/utils';
+import { URLProducts, URLSupport } from '@/routes/routes.url';
 
 function ThailandFlag({ className }: { className?: string }) {
   return (
-    <svg viewBox='0 0 24 16' className={className} aria-hidden xmlns='http://www.w3.org/2000/svg'>
-      <rect width='24' height='16' fill='#ED1C24' />
-      <rect y='2.67' width='24' height='10.66' fill='#FFF' />
-      <rect y='5.33' width='24' height='5.34' fill='#241D4F' />
+    <svg viewBox='0 0 24 24' className={className} aria-hidden xmlns='http://www.w3.org/2000/svg'>
+      <clipPath id='th-flag-clip'>
+        <circle cx='12' cy='12' r='12' />
+      </clipPath>
+      <g clipPath='url(#th-flag-clip)'>
+        <rect width='24' height='24' fill='#ED1C24' />
+        <rect y='4.8' width='24' height='14.4' fill='#FFF' />
+        <rect y='8.4' width='24' height='7.2' fill='#241D4F' />
+      </g>
     </svg>
   );
 }
@@ -56,10 +62,10 @@ function ThailandFlag({ className }: { className?: string }) {
 function buildBreadcrumbs(pathname: string) {
   const segments = pathname.split('/').filter(Boolean);
 
-  if (pathname === '/products' || segments.length === 0) {
+  if (pathname === URLProducts() || segments.length === 0) {
     return [
-      { label: 'Products', href: '/products', current: false },
-      { label: 'All Products', href: '/products', current: true },
+      { label: 'Products', href: URLProducts(), current: false },
+      { label: 'All Products', href: URLProducts(), current: true },
     ];
   }
 
@@ -85,10 +91,13 @@ export function AppHeader() {
   const { toggleSidebar } = useSidebar();
   const { pathname } = useLocation();
   const breadcrumbItems = buildBreadcrumbs(pathname);
+  const [country, setCountry] = useState(headerDummy.countryCode);
   const [locale, setLocale] = useState(headerDummy.locale);
   const [notifications, setNotifications] = useState(notificationItems);
 
   const unreadCount = notifications.filter((n) => n.unread).length;
+  const selectedCountry =
+    countryOptions.find((option) => option.code === country) ?? countryOptions[0];
 
   return (
     <header className='z-20 flex h-14 shrink-0 items-center gap-3 border-b border-border bg-card px-4'>
@@ -100,7 +109,7 @@ export function AppHeader() {
           onClick={toggleSidebar}
           aria-label='Toggle sidebar'
         >
-          <PanelLeft className='size-4' />
+          <TableOfContents className='size-4' />
         </Button>
 
         <Separator
@@ -127,38 +136,70 @@ export function AppHeader() {
       </div>
 
       <div className='flex items-center gap-1 sm:gap-2'>
-        <DropdownMenu>
-          <DropdownMenuTrigger
-            render={
-              <Button
-                variant='outline'
-                size='sm'
-                className='hidden h-8 gap-2 px-2.5 sm:inline-flex'
-              />
-            }
-          >
-            <ThailandFlag className='h-3.5 w-5 rounded-xs' />
-            <span className='text-muted-foreground'>ไทย</span>
-            <Languages className='size-3.5 text-muted-foreground' />
-            <span>{locale}</span>
-            <ChevronDown className='size-3.5 text-muted-foreground' />
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align='end' className='w-48'>
-            <DropdownMenuGroup>
-              <DropdownMenuLabel>Language</DropdownMenuLabel>
-              {languageOptions.map((option) => (
-                <DropdownMenuItem
-                  key={option.code}
-                  onClick={() => setLocale(option.englishLabel)}
-                  className={cn(locale === option.englishLabel && 'bg-muted font-medium')}
-                >
-                  <span className='flex-1'>{option.label}</span>
-                  <span className='text-xs text-muted-foreground'>{option.englishLabel}</span>
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuGroup>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <div className='hidden items-center sm:flex'>
+          <DropdownMenu>
+            <DropdownMenuTrigger
+              render={
+                <button
+                  type='button'
+                  className='inline-flex h-8 items-center gap-1.5 rounded-md px-1.5 text-sm text-foreground transition-colors hover:bg-muted'
+                />
+              }
+            >
+              <ThailandFlag className='size-5 shrink-0' />
+              <span>{selectedCountry.label}</span>
+              <ChevronDown className='size-3.5 text-muted-foreground' />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align='end' className='w-44'>
+              <DropdownMenuGroup>
+                <DropdownMenuLabel>Country</DropdownMenuLabel>
+                {countryOptions.map((option) => (
+                  <DropdownMenuItem
+                    key={option.code}
+                    onClick={() => setCountry(option.code)}
+                    className={cn(country === option.code && 'bg-muted font-medium')}
+                  >
+                    <span className='flex-1'>{option.label}</span>
+                    <span className='text-xs text-muted-foreground'>{option.englishLabel}</span>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
+
+          <Separator
+            orientation='vertical'
+            className='mx-1.5 h-4 data-vertical:h-4 data-vertical:self-center'
+          />
+
+          <DropdownMenu>
+            <DropdownMenuTrigger
+              render={
+                <button
+                  type='button'
+                  className='inline-flex h-8 items-center gap-1.5 rounded-md px-1.5 text-sm text-foreground transition-colors hover:bg-muted'
+                />
+              }
+            >
+              <span>{locale}</span>
+              <ChevronDown className='size-3.5 text-muted-foreground' />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align='end' className='w-40'>
+              <DropdownMenuGroup>
+                <DropdownMenuLabel>Language</DropdownMenuLabel>
+                {languageOptions.map((option) => (
+                  <DropdownMenuItem
+                    key={option.code}
+                    onClick={() => setLocale(option.label)}
+                    className={cn(locale === option.label && 'bg-muted font-medium')}
+                  >
+                    {option.label}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
 
         <Button
           variant='ghost'
@@ -225,7 +266,7 @@ export function AppHeader() {
             <DropdownMenuGroup>
               <DropdownMenuItem
                 className='justify-center rounded-none py-2.5 text-primary'
-                render={<Link to='/support' />}
+                render={<Link to={URLSupport()} />}
               >
                 View all
               </DropdownMenuItem>

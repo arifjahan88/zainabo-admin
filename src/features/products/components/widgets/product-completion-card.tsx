@@ -36,7 +36,7 @@ function CircularProgress({ value }: { value: number }) {
           strokeLinecap='round'
           strokeDasharray={circumference}
           strokeDashoffset={offset}
-          className='text-sky-500 transition-all duration-500'
+          className='text-sky-600 transition-all duration-500'
         />
       </svg>
       <div className='absolute inset-0 flex items-center justify-center'>
@@ -66,13 +66,13 @@ export function ProductCompletionCard() {
           {productCompletionItems.map((item) => (
             <li key={item.id} className='flex items-center gap-2.5 text-sm text-foreground'>
               {item.status === 'ready' ? (
-                <span className='flex size-5 shrink-0 items-center justify-center rounded-full border-2 border-sky-500 text-sky-500'>
+                <span className='flex size-5 shrink-0 items-center justify-center rounded-full border-2 border-sky-600 text-sky-600'>
                   <Check className='size-3 stroke-3' />
                 </span>
               ) : item.status === 'partial' ? (
                 <Circle className='size-5 shrink-0 text-slate-300' />
               ) : item.status === 'done' ? (
-                <span className='flex size-5 shrink-0 items-center justify-center rounded-full bg-emerald-500 text-white'>
+                <span className='flex size-5 shrink-0 items-center justify-center rounded-full bg-emerald-600 text-white'>
                   <Check className='size-3 stroke-3' />
                 </span>
               ) : (
@@ -84,7 +84,7 @@ export function ProductCompletionCard() {
               {item.count ? (
                 <span className='text-xs font-medium text-muted-foreground'>{item.count}</span>
               ) : item.status === 'done' ? (
-                <Check className='size-4 shrink-0 text-emerald-500' />
+                <Check className='size-4 shrink-0 text-emerald-600' />
               ) : null}
             </li>
           ))}

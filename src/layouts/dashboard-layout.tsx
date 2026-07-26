@@ -24,3 +24,5 @@ export function DashboardLayout() {
     </SidebarProvider>
   );
 }
+
+export default DashboardLayout;

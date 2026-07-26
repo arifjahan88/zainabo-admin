@@ -2,6 +2,7 @@ import { Download, Plus, Upload } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 import { Button } from '@/components/ui/button';
+import { URLProductsNew } from '@/routes/routes.url';
 
 export function ProductsPageHeader() {
   return (
@@ -25,7 +26,7 @@ export function ProductsPageHeader() {
           size='sm'
           className='h-9 gap-1.5'
           nativeButton={false}
-          render={<Link to='/products/new' />}
+          render={<Link to={URLProductsNew()} />}
         >
           <Plus className='size-4' />
           Add New Product

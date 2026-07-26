@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { ChevronDown } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 
 import {
   Sidebar,
@@ -18,6 +18,7 @@ import {
 import { cn } from '@/lib/utils';
 import { navItems } from '@/layouts/components/nav-config';
 import { SidebarPromo } from '@/layouts/components/sidebar-promo';
+import { URLProducts } from '@/routes/routes.url';
 
 function isPathActive(pathname: string, path: string, exact = false) {
   if (exact) return pathname === path;
@@ -36,21 +37,28 @@ export function AppSidebar() {
 
   return (
     <Sidebar collapsible='icon' className='border-r border-sidebar-border'>
-      <SidebarHeader className='gap-0 border-b border-sidebar-border px-3 py-4'>
+      <SidebarHeader className='gap-0 px-4 pt-5 pb-4'>
         <Link
-          to='/products'
-          className='flex items-center gap-2 overflow-hidden px-1 group-data-[collapsible=icon]:justify-center'
+          to={URLProducts()}
+          className='flex flex-col overflow-hidden px-1 group-data-[collapsible=icon]:items-center'
         >
-          <span className='flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary text-sm font-bold text-primary-foreground'>
-            Z
+          <span className='relative inline-flex w-fit items-start group-data-[collapsible=icon]:hidden'>
+            <span className='text-xl font-bold tracking-tight text-white'>Zainabo</span>
+            <span
+              aria-hidden
+              className='absolute -top-0.5 -right-2 size-1.5 rounded-full bg-primary'
+            />
           </span>
-          <span className='truncate text-sm font-semibold tracking-tight text-sidebar-foreground group-data-[collapsible=icon]:hidden'>
-            Zainabo <span className='font-normal text-sidebar-foreground/70'>Seller Center</span>
+          <span className='mt-0.5 text-xs font-normal text-white/80 group-data-[collapsible=icon]:hidden'>
+            Seller Center
+          </span>
+          <span className='hidden size-8 items-center justify-center rounded-lg bg-primary text-sm font-bold text-primary-foreground group-data-[collapsible=icon]:flex'>
+            Z
           </span>
         </Link>
       </SidebarHeader>
 
-      <SidebarContent className='px-2 py-3'>
+      <SidebarContent className='px-2 py-2'>
         <SidebarMenu className='gap-0.5'>
           {navItems.map((item) => {
             const hasChildren = Boolean(item.children?.length);
@@ -65,9 +73,9 @@ export function AppSidebar() {
                     isActive={sectionActive}
                     tooltip={item.title}
                     className={cn(
-                      'h-9 rounded-lg text-sidebar-foreground/80',
+                      'h-9 rounded-lg text-white/90 hover:bg-white/5 hover:text-white',
                       sectionActive &&
-                        'bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground data-active:bg-primary data-active:text-primary-foreground'
+                        'bg-primary text-white hover:bg-primary hover:text-white data-active:bg-primary data-active:text-white'
                     )}
                     render={<Link to={item.path} />}
                   >
@@ -84,29 +92,29 @@ export function AppSidebar() {
                   isActive={sectionActive}
                   tooltip={item.title}
                   className={cn(
-                    'h-9 rounded-lg text-sidebar-foreground/80',
+                    'h-9 rounded-lg text-white/90 hover:bg-white/5 hover:text-white',
                     sectionActive &&
-                      'bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground data-active:bg-primary data-active:text-primary-foreground'
+                      'bg-primary text-white hover:bg-primary hover:text-white data-active:bg-primary data-active:text-white'
                   )}
                   onClick={() => toggleMenu(item.title)}
                 >
                   <Icon />
                   <span className='flex-1'>{item.title}</span>
-                  <ChevronDown
+                  <ChevronRight
                     className={cn(
                       'ml-auto size-4 transition-transform',
-                      isOpen && 'rotate-180',
-                      sectionActive && 'text-primary-foreground'
+                      isOpen && 'rotate-90',
+                      sectionActive && 'text-white'
                     )}
                   />
                 </SidebarMenuButton>
 
                 {isOpen ? (
-                  <SidebarMenuSub className='mx-0 ml-3.5 border-l border-sidebar-border px-0 py-1 pl-3 group-data-[collapsible=icon]:hidden'>
+                  <SidebarMenuSub className='mx-0 border-0 px-0 py-1 pl-4 group-data-[collapsible=icon]:hidden'>
                     {item.children!.map((child) => {
                       const childActive =
-                        child.path === '/products'
-                          ? pathname === '/products'
+                        child.path === URLProducts()
+                          ? pathname === URLProducts()
                           : isPathActive(pathname, child.path, true);
 
                       return (
@@ -115,8 +123,9 @@ export function AppSidebar() {
                             isActive={childActive}
                             size='sm'
                             className={cn(
-                              'h-8 gap-2 text-sidebar-foreground/65 hover:text-sidebar-foreground',
-                              childActive && 'font-medium text-primary data-active:text-primary'
+                              'h-8 gap-2 text-white/75 hover:bg-white/5 hover:text-white',
+                              childActive &&
+                                'bg-transparent font-medium text-primary hover:bg-transparent hover:text-primary data-active:bg-transparent data-active:text-primary'
                             )}
                             render={<Link to={child.path} />}
                           >
@@ -128,7 +137,7 @@ export function AppSidebar() {
                             />
                             <span className='flex-1 truncate'>{child.title}</span>
                             {child.badge != null ? (
-                              <span className='rounded-md bg-sidebar-accent px-1.5 text-[10px] font-medium text-sidebar-foreground/70'>
+                              <span className='rounded-full bg-black/35 px-1.5 py-0.5 text-[10px] font-medium text-white/90'>
                                 {child.badge}
                               </span>
                             ) : null}

@@ -95,7 +95,7 @@ export function ProductsTable({
                 <TableCell>
                   <div className='flex items-center justify-end gap-0.5'>
                     <Button
-                      variant='ghost'
+                      variant='outline'
                       size='icon-sm'
                       className='text-muted-foreground'
                       aria-label='View'
@@ -103,7 +103,7 @@ export function ProductsTable({
                       <Eye />
                     </Button>
                     <Button
-                      variant='ghost'
+                      variant='outline'
                       size='icon-sm'
                       className='text-muted-foreground'
                       aria-label='Edit'
@@ -114,7 +114,7 @@ export function ProductsTable({
                       <DropdownMenuTrigger
                         render={
                           <Button
-                            variant='ghost'
+                            variant='outline'
                             size='icon-sm'
                             className='text-muted-foreground'
                             aria-label='More actions'

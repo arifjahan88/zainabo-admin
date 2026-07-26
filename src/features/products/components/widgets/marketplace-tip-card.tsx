@@ -2,6 +2,7 @@ import { Lightbulb } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 import { Card, CardContent } from '@/components/ui/card';
+import { URLMarketing } from '@/routes/routes.url';
 
 function TipIllustration({ className }: { className?: string }) {
   return (
@@ -30,7 +31,7 @@ export function MarketplaceTipCard() {
           High-quality images and detailed descriptions can increase your sales by up to 30%.
         </p>
         <Link
-          to='/marketing'
+          to={URLMarketing()}
           className='inline-flex text-xs font-semibold text-orange-600 hover:underline'
         >
           Learn More →

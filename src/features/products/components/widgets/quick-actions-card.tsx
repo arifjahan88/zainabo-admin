@@ -3,42 +3,50 @@ import { Link } from 'react-router-dom';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
+import {
+  URLCustomers,
+  URLInventory,
+  URLProducts,
+  URLProductsBulkUpload,
+  URLProductsNew,
+  URLStoreSettings,
+} from '@/routes/routes.url';
 
 const actions = [
   {
     title: 'Add New Product',
     icon: CirclePlus,
-    to: '/products/new',
+    to: URLProductsNew(),
     color: 'bg-rose-50 text-rose-600',
   },
   {
     title: 'Bulk Upload',
     icon: CloudUpload,
-    to: '/products/bulk-upload',
+    to: URLProductsBulkUpload(),
     color: 'bg-violet-50 text-violet-600',
   },
   {
     title: 'Manage Inventory',
     icon: Package,
-    to: '/inventory',
+    to: URLInventory(),
     color: 'bg-sky-50 text-sky-600',
   },
   {
     title: 'Product Categories',
     icon: Tag,
-    to: '/products',
+    to: URLProducts(),
     color: 'bg-orange-50 text-orange-500',
   },
   {
     title: 'Brand Management',
     icon: Shield,
-    to: '/store-settings',
+    to: URLStoreSettings(),
     color: 'bg-indigo-50 text-indigo-600',
   },
   {
     title: 'Product Reviews',
     icon: Star,
-    to: '/customers',
+    to: URLCustomers(),
     color: 'bg-amber-50 text-amber-500',
   },
 ];

@@ -19,13 +19,13 @@ function filterProducts(products: Product[], filters: ProductFiltersState): Prod
     if (q && !product.name.toLowerCase().includes(q) && !product.sku.toLowerCase().includes(q)) {
       return false;
     }
-    if (filters.category !== 'all' && product.category !== filters.category) {
+    if (filters.category !== 'All Categories' && product.category !== filters.category) {
       return false;
     }
-    if (filters.brand !== 'all' && product.brand !== filters.brand) {
+    if (filters.brand !== 'All Brands' && product.brand !== filters.brand) {
       return false;
     }
-    if (filters.status !== 'all' && product.status !== filters.status) {
+    if (filters.status !== 'All Status' && product.status !== filters.status) {
       return false;
     }
     if (filters.stock === 'in' && product.stock <= 10) return false;
@@ -40,10 +40,10 @@ function filterProducts(products: Product[], filters: ProductFiltersState): Prod
 export default function AllProductsPage() {
   const [filters, setFilters] = useState<ProductFiltersState>({
     search: '',
-    category: 'all',
-    brand: 'all',
-    status: 'all',
-    stock: 'all',
+    category: 'All Categories',
+    brand: 'All Brands',
+    status: 'All Status',
+    stock: 'All Stock',
   });
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(10);

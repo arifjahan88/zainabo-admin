@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import { ListFilter, Search } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
@@ -9,6 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { cn } from '@/lib/utils';
 
 export type ProductFiltersState = {
   search: string;
@@ -23,6 +25,22 @@ type ProductFiltersProps = {
   onChange: (next: ProductFiltersState) => void;
 };
 
+const selectTriggerClass =
+  'h-auto w-40 shrink-0 items-center gap-2 rounded-lg border border-border bg-background py-2 pr-2 pl-3 shadow-none data-[size=default]:h-auto';
+
+function FilterSelectTrigger({ label, children }: { label: string; children: ReactNode }) {
+  return (
+    <SelectTrigger className={selectTriggerClass}>
+      <span className='flex min-w-0 flex-1 flex-col items-start gap-0.5 text-left'>
+        <span className='text-[11px] leading-none font-medium text-muted-foreground'>{label}</span>
+        <span className='w-full text-sm leading-tight font-medium text-foreground *:data-[slot=select-value]:line-clamp-1'>
+          {children}
+        </span>
+      </span>
+    </SelectTrigger>
+  );
+}
+
 export function ProductFilters({ value, onChange }: ProductFiltersProps) {
   const update = (patch: Partial<ProductFiltersState>) => {
     onChange({ ...value, ...patch });
@@ -36,20 +54,20 @@ export function ProductFilters({ value, onChange }: ProductFiltersProps) {
           value={value.search}
           onChange={(e) => update({ search: e.target.value })}
           placeholder='Search products by name, SKU, or barcode...'
-          className='h-9 pl-9'
+          className='h-12 w-full rounded-lg border border-border bg-background pl-9 shadow-none'
         />
       </div>
 
       <div className='flex flex-wrap items-center gap-2'>
         <Select
           value={value.category}
-          onValueChange={(category) => update({ category: category ?? 'all' })}
+          onValueChange={(category) => update({ category: category ?? 'All Categories' })}
         >
-          <SelectTrigger className='h-9 w-32.5 bg-background'>
-            <SelectValue placeholder='Category' />
-          </SelectTrigger>
+          <FilterSelectTrigger label='Category'>
+            <SelectValue placeholder='All Categories' />
+          </FilterSelectTrigger>
           <SelectContent>
-            <SelectItem value='all'>Category</SelectItem>
+            <SelectItem value='All Categories'>All Categories</SelectItem>
             <SelectItem value='Apparel'>Apparel</SelectItem>
             <SelectItem value='Accessories'>Accessories</SelectItem>
             <SelectItem value='Footwear'>Footwear</SelectItem>
@@ -57,12 +75,15 @@ export function ProductFilters({ value, onChange }: ProductFiltersProps) {
           </SelectContent>
         </Select>
 
-        <Select value={value.brand} onValueChange={(brand) => update({ brand: brand ?? 'all' })}>
-          <SelectTrigger className='h-9 w-30 bg-background'>
-            <SelectValue placeholder='Brand' />
-          </SelectTrigger>
+        <Select
+          value={value.brand}
+          onValueChange={(brand) => update({ brand: brand ?? 'All Brands' })}
+        >
+          <FilterSelectTrigger label='Brand'>
+            <SelectValue placeholder='All Brands' />
+          </FilterSelectTrigger>
           <SelectContent>
-            <SelectItem value='all'>Brand</SelectItem>
+            <SelectItem value='All Brands'>All Brands</SelectItem>
             <SelectItem value='Zainabo'>Zainabo</SelectItem>
             <SelectItem value='Maison Z'>Maison Z</SelectItem>
             <SelectItem value='Urban Z'>Urban Z</SelectItem>
@@ -72,13 +93,13 @@ export function ProductFilters({ value, onChange }: ProductFiltersProps) {
 
         <Select
           value={value.status}
-          onValueChange={(status) => update({ status: status ?? 'all' })}
+          onValueChange={(status) => update({ status: status ?? 'All Status' })}
         >
-          <SelectTrigger className='h-9 w-30 bg-background'>
-            <SelectValue placeholder='Status' />
-          </SelectTrigger>
+          <FilterSelectTrigger label='Status'>
+            <SelectValue placeholder='All Status' />
+          </FilterSelectTrigger>
           <SelectContent>
-            <SelectItem value='all'>Status</SelectItem>
+            <SelectItem value='All Status'>All Status</SelectItem>
             <SelectItem value='published'>Published</SelectItem>
             <SelectItem value='low_stock'>Low Stock</SelectItem>
             <SelectItem value='out_of_stock'>Out of Stock</SelectItem>
@@ -87,19 +108,28 @@ export function ProductFilters({ value, onChange }: ProductFiltersProps) {
           </SelectContent>
         </Select>
 
-        <Select value={value.stock} onValueChange={(stock) => update({ stock: stock ?? 'all' })}>
-          <SelectTrigger className='h-9 w-27.5 bg-background'>
-            <SelectValue placeholder='Stock' />
-          </SelectTrigger>
+        <Select
+          value={value.stock}
+          onValueChange={(stock) => update({ stock: stock ?? 'All Stock' })}
+        >
+          <FilterSelectTrigger label='Stock'>
+            <SelectValue placeholder='All Stock' />
+          </FilterSelectTrigger>
           <SelectContent>
-            <SelectItem value='all'>Stock</SelectItem>
+            <SelectItem value='All Stock'>All Stock</SelectItem>
             <SelectItem value='in'>In Stock</SelectItem>
             <SelectItem value='low'>Low</SelectItem>
             <SelectItem value='out'>Out</SelectItem>
           </SelectContent>
         </Select>
 
-        <Button variant='outline' size='sm' className='h-9 gap-1.5'>
+        <Button
+          variant='outline'
+          size='sm'
+          className={cn(
+            'h-12 shrink-0 gap-1.5 rounded-lg border border-border bg-background px-3 shadow-none'
+          )}
+        >
           <ListFilter className='size-4' />
           Filters
         </Button>

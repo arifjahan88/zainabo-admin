@@ -1,17 +1,27 @@
+import { URLFinance, URLStoreSettings, URLSupport } from '@/routes/routes.url';
+
 export const headerDummy = {
   storeName: 'Zainabo Fashion',
   sellerId: 'ZB12345',
   avatarUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop',
   locale: 'English',
   countryCode: 'TH',
+  countryLabel: 'ไทย',
   messageCount: 3,
   notificationCount: 5,
 };
 
+export const countryOptions = [
+  { code: 'TH', label: 'ไทย', englishLabel: 'Thailand' },
+  { code: 'US', label: 'USA', englishLabel: 'United States' },
+  { code: 'SG', label: 'Singapore', englishLabel: 'Singapore' },
+  { code: 'MY', label: 'Malaysia', englishLabel: 'Malaysia' },
+] as const;
+
 export const languageOptions = [
-  { code: 'th', label: 'ไทย', englishLabel: 'Thai', flag: 'TH' },
-  { code: 'en', label: 'English', englishLabel: 'English', flag: 'TH' },
-  { code: 'zh', label: '中文', englishLabel: 'Chinese', flag: 'CN' },
+  { code: 'en', label: 'English' },
+  { code: 'th', label: 'ไทย' },
+  { code: 'zh', label: '中文' },
 ] as const;
 
 export const notificationItems = [
@@ -53,8 +63,8 @@ export const notificationItems = [
 ];
 
 export const userMenuItems = [
-  { id: 'profile', label: 'Store Profile', to: '/store-settings' },
-  { id: 'settings', label: 'Store Settings', to: '/store-settings' },
-  { id: 'finance', label: 'Billing & Finance', to: '/finance' },
-  { id: 'support', label: 'Help & Support', to: '/support' },
+  { id: 'profile', label: 'Store Profile', to: URLStoreSettings() },
+  { id: 'settings', label: 'Store Settings', to: URLStoreSettings() },
+  { id: 'finance', label: 'Billing & Finance', to: URLFinance() },
+  { id: 'support', label: 'Help & Support', to: URLSupport() },
 ] as const;
